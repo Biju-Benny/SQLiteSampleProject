@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:id="@+id/rowProfileIV"
+            android:layout_centerVertical="true"
+
+
+            android:src="@drawable/ic_photo"
+            app:civ_border_width="2dp"
+            app:civ_border_color="#ACA4A4"/>
+
+        <LinearLayout
+            android:id="@+id/linearLayoutList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/rowProfileIV"
+            android:layout_toRightOf="@+id/rowProfileIV"
+            android:layout_toStartOf="@id/moreButton"
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="5dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/listName"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:text="Name"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/listPhone"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:text="Phone"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/listEmail"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:text="Email"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/listDob"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:text="DOB"/>
+
+
+
+
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/moreButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/ic_baseline_more_vert_24"
+            android:background="@null"/>
+
+
+
+
+    </RelativeLayout>
+
+
+
+
+</androidx.cardview.widget.CardView>

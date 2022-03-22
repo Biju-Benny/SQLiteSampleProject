@@ -21,9 +21,7 @@ class AddRecordActivity : AppCompatActivity() {
     //permission constants
     private val PICK_PHOTO_CODE = 100
 
-    //array of permissions
-    private lateinit var cameraPermissions : Array<String>   //camera and storage
-    private lateinit var storagePermissions : Array<String>  //only storage
+
     private var imageUri: Uri? = null
     private var name:String? = ""
     private var phone:String? = ""
@@ -46,13 +44,7 @@ class AddRecordActivity : AppCompatActivity() {
 
         dbHelper = MyDbHelper(this)
 
-        //init permission arrays
-        cameraPermissions = arrayOf(
-            android.Manifest.permission.CAMERA,
-            android.Manifest.permission.WRITE_EXTERNAL_STORAGE
-        )
 
-        storagePermissions = arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
 
         //click image view to pick image
         profileIV.setOnClickListener{

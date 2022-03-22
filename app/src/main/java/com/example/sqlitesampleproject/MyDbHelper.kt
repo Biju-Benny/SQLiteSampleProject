@@ -1,5 +1,6 @@
 package com.example.sqlitesampleproject
 
+import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
@@ -49,13 +50,72 @@ class MyDbHelper(context: Context?): SQLiteOpenHelper(context,Constants.DB_NAME,
         values.put(Constants.C_ADDED_TIME_STAMP,addedTime)
         values.put(Constants.C_UPDATED_TIME_STAMP,updatedTime)
 
-        //insert row, it will return record id ofsaved record
+        //insert row, it will return record id of saved record
         val id = db.insert(Constants.TABLE_NAME,null,values)
         //close db connection
         db.close()
         //return id of inserted  record
         return id
 
+
+    }
+    //get all data
+    @SuppressLint("Range")
+    fun getAllData(orderBy:String): ArrayList<ModelRecord>{
+
+        val recordList = ArrayList<ModelRecord>()
+        val selectQuery = "SELECT * FROM ${Constants.TABLE_NAME} ORDER BY $orderBy"
+        val db = this.writableDatabase
+        val cursor = db.rawQuery(selectQuery,null)
+
+        if (cursor.moveToFirst()){
+            do{
+                val modelRecord = ModelRecord(
+                    ""+cursor.getInt(cursor.getColumnIndex(Constants.C_ID)),
+                    ""+cursor.getString(cursor.getColumnIndex(Constants.C_NAME)),
+                    ""+cursor.getString(cursor.getColumnIndex(Constants.C_IMAGE)),
+                    ""+cursor.getString(cursor.getColumnIndex(Constants.C_BIO)),
+                    ""+cursor.getString(cursor.getColumnIndex(Constants.C_PHONE)),
+                    ""+cursor.getString(cursor.getColumnIndex(Constants.C_EMAIL)),
+                    ""+cursor.getString(cursor.getColumnIndex(Constants.C_DOB)),
+                    ""+cursor.getString(cursor.getColumnIndex(Constants.C_ADDED_TIME_STAMP)),
+                    ""+cursor.getString(cursor.getColumnIndex(Constants.C_UPDATED_TIME_STAMP))
+                )
+                //add record to list
+                recordList.add(modelRecord)
+            }while (cursor.moveToNext())
+        }
+        db.close()
+        return  recordList
+
+    }
+    //search data
+    @SuppressLint("Range")
+    fun searchData(query: String):ArrayList<ModelRecord>{
+        val recordList = ArrayList<ModelRecord>()
+        val selectQuery = "SELECT * FROM ${Constants.TABLE_NAME} WHERE ${Constants.C_NAME} LIKE '% $query' "
+        val db = this.writableDatabase
+        val cursor = db.rawQuery(selectQuery,null)
+
+        if (cursor.moveToFirst()){
+            do{
+                val modelRecord = ModelRecord(
+                    ""+cursor.getInt(cursor.getColumnIndex(Constants.C_ID)),
+                    ""+cursor.getString(cursor.getColumnIndex(Constants.C_NAME)),
+                    ""+cursor.getString(cursor.getColumnIndex(Constants.C_IMAGE)),
+                    ""+cursor.getString(cursor.getColumnIndex(Constants.C_BIO)),
+                    ""+cursor.getString(cursor.getColumnIndex(Constants.C_PHONE)),
+                    ""+cursor.getString(cursor.getColumnIndex(Constants.C_EMAIL)),
+                    ""+cursor.getString(cursor.getColumnIndex(Constants.C_DOB)),
+                    ""+cursor.getString(cursor.getColumnIndex(Constants.C_ADDED_TIME_STAMP)),
+                    ""+cursor.getString(cursor.getColumnIndex(Constants.C_UPDATED_TIME_STAMP))
+                )
+                //add record to list
+                recordList.add(modelRecord)
+            }while (cursor.moveToNext())
+        }
+        db.close()
+        return  recordList
 
     }
 
